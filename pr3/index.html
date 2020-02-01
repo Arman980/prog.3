@@ -1,0 +1,212 @@
+<html>
+
+<head>
+    <meta charset="utf8">
+    <script src="p5.js"></script>
+	<script src="/socket.io/socket.io/"></script>
+    <script src="script.js"></script>
+    <style>
+    	#white{
+    		 background-color:#dee2de;
+    	}
+    	#green{
+    		background-color:#29d829;
+    	}
+    	#red{
+    		background-color:#f44265;
+    	}
+    	#blu{
+    		background-color:#1e69aa;
+    	}
+		#blue{
+    		background-color:#0000ff;
+    	}
+    	#darkgreen{
+    		background-color:	#006400;
+    	}
+    	#dark{
+    		background-color:#252b30;
+    	}
+    	#yellow{
+    		background-color: yellow;
+    	}
+		#lawnGreen{
+    		background-color:#7CFC00;
+    	}
+        div{
+            display:inline-block;
+        }
+        table, tr, td{
+        	 border: 1px solid black;
+        	 border-collapse:collapse;
+        	 padding:5px;
+        }
+    	table{
+			margin-top:20px;
+			margin-right:20px;
+			float:right;
+		}
+    	body{
+    		font-family:optima
+    	}
+		#first{
+			background-color:#232323;
+			color:white;
+		}
+		.alice{
+			border-color:aliceblue;
+			height:40px;
+		}
+    </style>
+</head>
+
+
+<body>
+	<table>
+		<tr id="first">
+			<td class="alice"></td>
+			<td class="alice">Color</td>
+			<td class="alice">Basic Info</td>
+			<td class="alice">Energy</td>
+			<td class="alice">Multiply info</td>
+			<td class="alice">Energy Obtainment</td>
+			<td class="alice">Special Characteristic</td>
+		</tr>
+		<tr>
+			<td id="white"></td>
+			<td>
+				<p>White</p>
+			</td>
+			<td>
+				<p>Just an empty space</p>
+			</td>
+			<td>
+				<p>-</p>
+			</td>
+			<td>No multiply</td>
+			<td>
+				<p>No energy</p>
+			</td>
+			<td>
+				<p>No special characteristics</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td id="green"></td>
+			<td>
+				<p>Green</p>
+			</td>
+			<td>
+				<p>It's just a Grass.</p>
+			</td>
+			<td>
+				<p>-</p>
+			</td>
+			<td>
+				<p>Can multiply once in 3 frames</p>
+			</td>
+			<td>
+				<p>No energy</p>
+			</td>
+			<td>
+				<p>Can walk on Damaged Soil and make it red:</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td id="yellow"></td>
+			<td>
+				<p>yellow</p>
+			</td>
+			<td>
+				<p>grassEater</p>
+			</td>
+			<td>
+				<p>5</p>
+			</td>
+			<td>
+				<p>Multiplies after energy reaches 5+</p>
+			</td>
+			<td>
+				<p>Eating Grass</p>
+			</td>
+			<td>
+				<p>Can walk on Damaged Soil and make it yellow</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td id="red"></td>
+			<td>
+				<p>Red</p>
+			</td>
+			<td>
+				<p>Wild Animal</p>
+			</td>
+			<td>
+				<p>10</p>
+			</td>
+			<td>
+				<p>Multiplies after energy reaches 5+</p>
+			</td>
+			<td>
+				<p>Eating yellows</p>
+			</td>
+			<td>
+				<p>Can walk on Damaged Soil and make it red:</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td id="darkGreen"></td>
+			<td>
+				<p>darkGreen</p>
+			</td>
+			<td>
+				<p>grass multiplier</p>
+			</td>
+			<td>
+				<p>-</p>
+			</td>
+			<td>
+				<p>No multiply</p>
+			</td>
+			<td>
+				<p>No energy</p>
+			</td>
+			<td>
+				<p>Appears randomly:</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td id="lawnGreen"></td>
+			<td>
+				<p>lawnGreen</p>
+			</td>
+			<td>
+				<p> grassEater multiplier</p>
+			</td>
+			<td>
+				<p>-</p>
+			</td>
+			<td>
+				<p>No multiply</p>
+			</td>
+			<td>
+				<p>No energy</p>
+			</td>
+			<td>
+				<p>Appears randomly:</p>
+			</td>
+		</tr>
+
+
+
+		
+	</table>
+	<br>
+</body>
+
+</html>
