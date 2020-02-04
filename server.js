@@ -1,28 +1,27 @@
-var express = require('express');
-var Grass = require("./modules/Grass.js");
-var GrassEater = require("./modules/GrassEater.js");
-let random = require('./modules/random');
-var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
-var messages = [];
+//! Requiring modules  --  START
+var grass = require("./xot.js");
+var mard = require("./mard.js");
+var xotaker = require("./xotaker.js");
+var car = require("./car.js");
+var Gishatich = require("./gishatich.js");
+//! Requiring modules  --  END
 
-
-
+//! Setting global arrays  --  START
 grassArr = [];
-grassEaterArr = [];
-matrix = [];
+mardArr = [];
+xotakerArr = [];
+carArr = [];
+GishatichArr = [];
 grassHashiv = 0;
-
-
-
-
-
-
-app.use(express.static("."));
-app.get('/', function (req, res) {
-    res.redirect('index.html');
-});
+mardHashiv = 0;
+xotakerHashiv = 0;
+carHashiv = 0;
+GishatichHashiv = 0;
+//! Setting global arrays  -- END
+function random(fr,ft){
+    Math.floor(Math.random(fr,ft))
+}
+//! Creating MATRIX -- START
 
 function matrixGenerator(l) {
     var m = [];
@@ -47,6 +46,26 @@ function matrixGenerator(l) {
     }
     return m;
 }
+
+//! Creating MATRIX -- END
+
+
+
+//! SERVER STUFF  --  START
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+app.use(express.static("."));
+app.get('/', function (req, res) {
+    res.redirect('index.html');
+});
+server.listen(3000, function () {
+    console.log("hey");
+
+});
+//! SERVER STUFF END  --  END
+
 
 grassArr = [];
 waterArr = [];
