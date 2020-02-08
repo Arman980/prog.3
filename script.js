@@ -1,18 +1,27 @@
 ///! Setup function fires automatically
 function setup() {
 
-    var side = 20;
-
+    var side = 30;
 
     var socket = io();
     var clientmatrix = [];
     var m = 20;
-
     var n = 20;
 
+let grassCountlement = document.getElementById('grassCount');
+let grassEatrCountElement = document.getElementById('grassEaterCount');
+var clientwheater = document.getElementById("weatherClint");
     
 
+function mousePressed(){
 
+    var x = Math.floor(mouseX / side);
+    var y = Math.floor(mouseY / side);
+    var arr = [x,y];
+    console.log(arr)
+    socket.emit("fire",arr)
+
+}
 
 
     frameRate(5);
@@ -63,7 +72,7 @@ function setup() {
     
     socket.on("data", drawMatrix);
 }
-
+setInterval(drawServer)
 
     
     
