@@ -1,0 +1,78 @@
+<html>
+   <head>
+         <style>
+               #legend {position:relative;top: 0;right: 0;width: 800px;} .legend-color {width: 30px;height: 30px;} td {border: 1px solid black; font-size: 14px; padding-left: 5px;}
+           </style>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+      <script src="script.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>   </head>
+   <body>
+         <br><table id="legend">
+               <tr>
+                   <td class="legend-color">Գույն</td>
+                   <td>Անվանում</td>
+                   <td>Շարժվում է</td>
+                   <td>Ուտում է</td>
+                   <td>Բազմանում է</td>
+                   <td>Սատկում է</td>
+                   <td>Ստեղծվում է</td>
+               </tr>
+       
+               <tr>
+                   <td class="legend-color" style="background-color:gray"></td>
+                   <td>Դատարկ վանդակներ</td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+               </tr>
+               <tr>
+                   <td class="legend-color" style="background-color:green"></td>
+                   <td>խոտ</td>
+                   <td></td>
+                   <td></td>
+                   <td>Մոտակա 8 վանդակներում, 4 տակտը մեկ</td>
+                   <td></td>
+                   <td id="grassCount"></td>
+               </tr>
+               <tr>
+                   <td class="legend-color" style="background-color:yellow"></td>
+                   <td>խոտակեր</td>
+                   <td>Մոտակա 8 վանդակներում, էներգիան քչանում է 1֊ով</td>
+                   <td>Մոլախոտերին, մոտակա 8 վանդակներում, ուտելիս էներգիան ավելանում է 1֊ով</td>
+                   <td>Բազմանում է մոտակա տարածքներում, երբ էներգիան 16֊ից ավել է</td>
+                   <td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
+                   <td id="grassEaterCount"></td>
+               </tr>
+               <tr>
+                   <td class="legend-color" style="background-color:red"></td>
+                   <td>Գիշատիչ</td>
+                   <td>Մոտակա 8 վանդակներում, էներգիան քչանում է 2֊ով</td>
+                   <td>Մոլախոտակերներին, մոտակա 8 վանդակներում, ուտելիս էներգիան ավելանում է 1֊ով</td>
+                   <td>Բազմանում է մոտակա տարածքներում, երբ էներգիան 15֊ից ավել է</td>
+                   <td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
+                   <td id="GishatichCount"></td>
+               </tr>
+               <tr>
+                   <td class="legend-color" style="background-color:rgb(242, 229, 213)"></td>
+                   <td>Մարդ</td>
+                   <td>Մոտակա 16 վանդակներում, էներգիան քչանում է 2֊ով</td>
+                   <td>Մոլախոտին,Գիշատիչներին,Մոլախոտակերներին, մոտակա 16 վանդակներում, ուտելիս էներգիան ավելանում է 1֊ով</td>
+                   <td>Բազմանում է մոտակա տարածքներում, երբ էներգիան 13֊ից ավել է</td>
+                   <td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
+                   <td id="grassMultiplayerCount"></td>
+               </tr>
+               <tr>
+                    <td class="legend-color" style="background-color:rgb(34, 33, 33)"></td>
+                    <td>Քար</td>
+                    <td>Չի շարժվում և ոչ ոք չի կարող շարժվել նրա վրայով</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td id="grassEaterMultiplayerCount"></td>
+                </tr>
+           </table>
+   </body>
+</html>
