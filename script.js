@@ -1,17 +1,21 @@
-///! Setup function fires automatically
+//! Setup function fires automatically
 function setup() {
 
-    var side = 30;
-
-    var socket = io();
-    var clientmatrix = [];
-    var m = 20;
-    var n = 20;
-
-let grassCountlement = document.getElementById('grassCount');
-let grassEatrCountElement = document.getElementById('grassEaterCount');
-var clientwheater = document.getElementById("weatherClint");
+    //! Getting DOM objects (HTML elements)
+    let grassCountElement = document.getElementById('grassCount');
+    let xotakerCountElement = document.getElementById('xotakerCount');
+    let GishatichCountElement = document.getElementById('GishatichCount');
+    let waterCountElement = document.getElementById('waterCount');
+    let banCountElement = document.getElementById('banCount');
+        var side = 20;
     
+    
+        var socket = io();
+        var clientmatrix = [];
+        var m = 20;
+    
+        var n = 20;
+      
 
 function mousePressed(){
 
@@ -72,7 +76,7 @@ function mousePressed(){
     
     socket.on("data", drawMatrix);
 }
-setInterval(drawServer)
+
 
     
     
