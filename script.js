@@ -1,82 +1,127 @@
+var CClickCount=0;
+function clickHandler(evt){
+    CClickCount=1;
+}
+
+    var socket = io();
+
+    var side = 30;
+
 //! Setup function fires automatically
 function setup() {
+    var p = document.getElementById("pElement");
+    p.addEventListener("click", clickHandler);
+    
+
+    var matrix = [];
+    var wea;
 
     //! Getting DOM objects (HTML elements)
     let grassCountElement = document.getElementById('grassCount');
-    let xotakerCountElement = document.getElementById('xotakerCount');
-    let GishatichCountElement = document.getElementById('GishatichCount');
-    let waterCountElement = document.getElementById('waterCount');
-    let banCountElement = document.getElementById('banCount');
-        var side = 20;
-    
-    
-        var socket = io();
-        var clientmatrix = [];
-        var m = 20;
-    
-        var n = 20;
-      
+    let grassEaterCountElement = document.getElementById('grassEaterCount');
+    let gishCountElement = document.getElementById('gishCount');
+    let amenCountElement = document.getElementById('amenCount');
+    let pixCountElement = document.getElementById('pixCount');
+    //! adding socket listener on "data" <-- name, after that fire 'drawCreatures' function 
+    socket.on("data", drawCreatures);
 
-function mousePressed(){
+    function drawCreatures(data) {
+        //! after getting data pass it to matrix variable
+        wea=data.wea;
+        matrix = data.matrix;
+        grassCountElement.innerText = data.grassCounter;
+        var gce;
+        grassEaterCountElement.innerText = data.grassEaterCounter;
+        var ece;
+        gishCountElement.innerText = data.gishCounter;
+        var gsce;
+        amenCountElement.innerText = data.amenCounter;
+        var ace;
+        pixCountElement.innerText = data.pixCounter;
+        var pce;
+        let curExText="";
+        if (wea==0)
+        {
+            curExText="Գարուն";
+        } else if (wea==1)
+        {
+            curExText="Ամառ";
+        } else if (wea==2)
+        {
+            curExText="Աշուն";
+        } else if (wea==3)
+        {
+            curExText="Ձմեռ";
+        }
+        document.getElementById("p1").innerHTML =curExText;
+        if(CClickCount==0)
+        {
+            gce=grassCountElement;
+            ece=grassEaterCountElement;
+            gsce=gishCountElement;
+            ace=amenCountElement;
+            pce=pixCountElement;
+        }
+        if(CClickCount==1)
+        {
+            grassCountElement=gce;
+            grassEaterCountElement=ece;
+            gishCountElement=gsce;
+            amenCountElement=ace;
+            pixCountElement=pce;
+        }
+        //! Every time it creates new Canvas woth new matrix size
+        createCanvas(matrix[0].length * side, matrix.length * side)
+        //! clearing background by setting it to new grey color
+        background('#acacac');
+        //! Draw grassCount and grassEaterCount to HTML (use DOM objects to update information, yes, and use .innerText <- function)
 
-    var x = Math.floor(mouseX / side);
-    var y = Math.floor(mouseY / side);
-    var arr = [x,y];
-    console.log(arr)
-    socket.emit("fire",arr)
-
-}
-
-
-    frameRate(5);
-    createCanvas(m * side, n * side);
-    background('#acacac');
-    function drawMatrix(data) {
-        clientmatrix = data.matrix
-        for (var y = 0; y < clientmatrix.length; y++) {
-            for (var x = 0; x < clientmatrix[y].length; x++) {
-    
-                if (clientmatrix[y][x] == 0) {
-                    fill("#acacac");
-                    rect(x * side, y * side, side, side);
+        //! Drawing and coloring RECTs
+        for (var i = 0; i < matrix.length; i++) {
+            for (var j = 0; j < matrix[i].length; j++) {
+                if(CClickCount==0)
+                {
+                    if (matrix[i][j] == 1) {
+                        if(wea==3)
+                        {
+                            fill("white");
+                        }
+                        else
+                        {
+                           fill("green"); 
+                        }
+                        rect(j * side, i * side, side, side);
+                    } else if (matrix[i][j] == 2) {
+                        fill("orange");
+                        rect(j * side, i * side, side, side);
+                    } else if (matrix[i][j] == 0) {
+                        fill('#acacac');
+                        rect(j * side, i * side, side, side);
+                    } else if (matrix[i][j] == 3) {
+                        fill('red');
+                        rect(j * side, i * side, side, side);
+                    } else if (matrix[i][j] == 4) {
+                        fill('blue');
+                        rect(j * side, i * side, side, side);
+                    } else if (matrix[i][j] == 5) {
+                        fill('yellow');
+                        rect(j * side, i * side, side, side);
+                    }  
                 }
-    
-                else if (clientmatrix[y][x] == 1) {
-                    if (weather == "Summer") {
-                        fill("green");
-                    } else if (weather != "Summer") {
-                        fill("#A79F15");
-                    }
-                    rect(x * side, y * side, side, side);
-                }
-    
-                else if (clientmatrix[y][x] == 2) {
-                    if (weather == "Winter") {
-                        fill("#696968");
-                    } else if (weather != "Winter") {
-                        fill("Yellow");
-                    }
-                    rect(x * side, y * side, side, side);
-                }
-                else if (clientmatrix[y][x] == 3) {
-                    fill("255, 0, 0 ");
-                    rect(x * side, y * side, side, side);
-                }
-                else if (clientmatrix[y][x] == 4) {
-                    fill("#7CFC00");
-                    rect(x * side, y * side, side, side);
-                }
-                else if (clientmatrix[y][x] == 5) {
-                    fill("#006400");
-                    rect(x * side, y * side, side, side);
+                else
+                {
+                    fill("black");
+                    rect(0, 0, 600, 600);
                 }
             }
         }
     }
-    
-    socket.on("data", drawMatrix);
 }
-
-
-    
-    
+function mousePressed() {
+    let curx=Math.floor(mouseX/side),cury=Math.floor(mouseY/side);
+    let Cordinates = {
+        x:curx,
+        y:cury
+    }
+    socket.emit("clicked",Cordinates);
+}

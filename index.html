@@ -1,81 +1,121 @@
 <html>
-   <head>
-         <style>
-               #legend {position:relative;top: 0;right: 0;width: 800px;} .legend-color {width: 30px;height: 30px;} td {border: 1px solid black; font-size: 14px; padding-left: 5px;}
-           </style>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
-      <script src="script.js"></script>
-      <script src="/socket.io/socket.io.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>   </head>
-   <body>
-         <br><table id="legend">
-               <tr>
-                   <td class="legend-color">color</td>
-                   <td>Basic Info</td>
-                   <td>Energy </td>
-                   <td>	Multiply info</td>
-                   <td>Energy Obtainment</td>
-                   <td>Special Characteristic</td>
-               </tr>
-       
-               <tr>
-                   <td class="legend-color" style="background-color:gray"></td>
-                   <td>Just an empty space</td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td class="legend-color" style="background-color:green"></td>
-                   <td>It's just a Grass</td>
-                   <td>-</td>
-                   <td>Can multiply once in 3 frames</td>
-                   <td>No energy</td>
-                   <td>Can walk on Damaged Soil and make it red</td>
-                   <td id="grassCount"></td>
-               </tr>
-               <tr>
-                   <td class="legend-color" style="background-color:yellow"></td>
-                   <td>grassEater</td>
-                   <td>5</td>
-                   <td>	
-                    Multiplies after energy reaches 5+</td>
-                   <td>Eating Grass</td>
-                   <td>Can walk on Damaged Soil and make it yellow</td>
-                   <td id="grassEaterCount"></td>
-               </tr>
-               <tr>
-                   <td class="legend-color" style="background-color:red"></td>
-                   <td>Wild Animal</td>
-                   <td>10</td>
-                   <td>	
-                    Multiplies after energy reaches 5+</td>
-                   <td>Eating yellows</td>
-                   <td>  Can walk on Damaged Soil and make it red:</td>
-                   <td id="GishatichCount"></td>
-               </tr>
-               <tr>
-                   <td class="legend-color" style="background-color:rgb(1, 88, 1)"></td>
-                   <td>grass multiplier</td>
-                   <td>-</td>
-                   <td>No multiply</td>
-                   <td>No energy</td>
-                   <td>	
-                    Appears randomly</td>
-                   <td id="grassMultiplayerCount"></td>
-               </tr>
-               <tr>
-                    <td class="legend-color" style="background-color:rgb(124, 252, 0)"></td>
-                    <td>grassEater multiplier</td>
-                    <td>-</td>
-                    <td>No multiply</td>
-                    <td>No energy</td>
-                    <td>	
-                        Appears randomly:</td>
-                    <td id="grassEaterMultiplayerCount"></td>
-                </tr>
-           </table>
-   </body>
+
+<head>
+    <meta charset="utf8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+
+        div {
+            display: inline-block;
+        }
+
+        h1 {
+            padding: 20px;
+            text-align: center;
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif !important;
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <h1>Ծրագրավորում III Երևան</h1>
+            </tr>
+            <tr>
+                <h1>Արման Գասպարյան</h1>
+            </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Գույն</th>
+                <th scope="col">Նկարագրություն</th>
+                <th scope="col">Ծնվել է</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="legend-color">color</td>
+                <td>Basic Info</td>
+                <td>Energy </td>
+                <td>	Multiply info</td>
+                <td>Energy Obtainment</td>
+                <td>Special Characteristic</td>
+            </tr>
+    
+            <tr>
+                <td class="legend-color" style="background-color:gray"></td>
+                <td>Just an empty space</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="legend-color" style="background-color:green"></td>
+                <td>It's just a Grass</td>
+                <td>-</td>
+                <td>Can multiply once in 3 frames</td>
+                <td>No energy</td>
+                <td>Can walk on Damaged Soil and make it red</td>
+                <td id="grassCount"></td>
+            </tr>
+            <tr>
+                <td class="legend-color" style="background-color:yellow"></td>
+                <td>grassEater</td>
+                <td>5</td>
+                <td>	
+                 Multiplies after energy reaches 5+</td>
+                <td>Eating Grass</td>
+                <td>Can walk on Damaged Soil and make it yellow</td>
+                <td id="grassEaterCount"></td>
+            </tr>
+            <tr>
+                <td class="legend-color" style="background-color:red"></td>
+                <td>Wild Animal</td>
+                <td>10</td>
+                <td>	
+                 Multiplies after energy reaches 5+</td>
+                <td>Eating yellows</td>
+                <td>  Can walk on Damaged Soil and make it red:</td>
+                <td id="GishatichCount"></td>
+            </tr>
+            <tr>
+                <td class="legend-color" style="background-color:rgb(1, 88, 1)"></td>
+                <td>grass multiplier</td>
+                <td>-</td>
+                <td>No multiply</td>
+                <td>No energy</td>
+                <td>	
+                 Appears randomly</td>
+                <td id="grassMultiplayerCount"></td>
+            </tr>
+            <tr>
+                 <td class="legend-color" style="background-color:rgb(124, 252, 0)"></td>
+                 <td>grassEater multiplier</td>
+                 <td>-</td>
+                 <td>No multiply</td>
+                 <td>No energy</td>
+                 <td>	
+                     Appears randomly:</td>
+                 <td id="grassEaterMultiplayerCount"></td>
+             </tr>
+    </table>
+    <p id="p1"></p>
+    <button id="pElement">Արմագեդոն</button>
+    <script src="p5.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+
 </html>
